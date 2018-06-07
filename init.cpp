@@ -4,17 +4,19 @@
 
 int main(int argc, char const *argv[]) {
 
-  if (argc != 3) { std::cout << "Incorrect amount of arguments."
+  if (argc != 2) { std::cout << "Incorrect amount of arguments."
                              << std::endl
                              << "Correct usage: "
                              << std::endl
-                             << "./PATTERN DNA_input_file.txt kmer_string"
+                             << "./PATTERN DNA_input_file.txt"
                              << std::endl;
                              return 1; }
 
   std::ifstream DNA_input_file(argv[1]);
 
   std::string DNA_string;
+
+
 
   char c; //We use this char to determine when NULL is reached.
 
@@ -24,11 +26,13 @@ int main(int argc, char const *argv[]) {
 
   DNAPattern *pattern_one = new DNAPattern(DNA_string); //test case
 
-  std::cout << "Number of matches with pattern "
-            << argv[2]
-            << ": "
-            << pattern_one->checkForKmer(argv[2])
-            << std::endl;
+  // std::cout << "Number of matches with pattern "
+  //           << "TT"
+  //           << ": "
+  //           << pattern_one->checkForKmer("TT")
+  //           << std::endl;
+
+  pattern_one->mostOccuringKmer(2);
 
   return 0;
 }

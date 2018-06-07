@@ -11,8 +11,9 @@ private:
 
 public:
 
-      DNAPattern  (std::string); //MUST have some sort of string associated with it.
-  int checkForKmer(std::string);
+       DNAPattern       (std::string); //MUST have some sort of string associated with it.
+  int  checkForKmer     (std::string);
+  void mostOccuringKmer (int);
 
 };
 

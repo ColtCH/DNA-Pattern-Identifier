@@ -10,3 +10,6 @@ all: build
 
 build:
 	$(CC) $(SRCS) -o $(TARGET) $(CFLAGS)
+
+run:
+	./$(TARGET) DNA_Text.txt
