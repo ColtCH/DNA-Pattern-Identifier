@@ -24,15 +24,13 @@ int main(int argc, char const *argv[]) {
      DNA_input_file >> DNA_string;
    }
 
-  DNAPattern *pattern_one = new DNAPattern(DNA_string); //test case
+  DNAPattern *pattern_one = new DNAPattern(DNA_string);
 
-  // std::cout << "Number of matches with pattern "
-  //           << "TT"
-  //           << ": "
-  //           << pattern_one->checkForKmer("TT")
-  //           << std::endl;
+  for ( int i = 1; i <= 5; i++ ){
+    pattern_one->mostOccuringKmer(i);
+    pattern_one->printUnorderedMap(i);
+  }
 
-  pattern_one->mostOccuringKmer(2);
-
+  pattern_one->findSuspiciousKmer(2);
   return 0;
 }

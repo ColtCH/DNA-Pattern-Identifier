@@ -12,4 +12,4 @@ build:
 	$(CC) $(SRCS) -o $(TARGET) $(CFLAGS)
 
 run:
-	./$(TARGET) DNA_Text.txt
+	./$(TARGET) Vibrio_cholerae.txt
