@@ -26,11 +26,26 @@ int main(int argc, char const *argv[]) {
 
   DNAPattern *pattern_one = new DNAPattern(DNA_string);
 
-  for ( int i = 1; i <= 5; i++ ){
+  for ( int i = 1; i <= 3; i++ ){
     pattern_one->mostOccuringKmer(i);
     pattern_one->printUnorderedMap(i);
   }
 
-  pattern_one->findSuspiciousKmer(2);
+  std::string DNA_pattern            = pattern_one->findSuspiciousKmer(2);
+  std::string DNA_pattern_compliment = pattern_one->findCompliment(DNA_pattern);
+
+  //std::string DNA_pattern_2          = "AATCGTAACCGTTGACAGTA";
+  //std::string DNA_pattern_2_comp     = pattern_one->findCompliment(DNA_pattern_2);
+
+  std::cout << DNA_pattern
+            << "'s compliment is "
+            << DNA_pattern_compliment
+            << std::endl;
+
+  //std::cout << DNA_pattern_2
+  //          << "'s compliment is "
+  //          << DNA_pattern_2_comp
+  //          << std::endl;
+
   return 0;
 }

@@ -119,7 +119,7 @@ Input:   an integer of the kmer you want to start the search at.
 Return:  Void. Outputs a print statement of the kmer with the highest 'score'.
 ================================================================================
 */
-void DNAPattern::findSuspiciousKmer (unsigned int starting_point){
+std::string DNAPattern::findSuspiciousKmer (unsigned int starting_point){
 
   long double max = 0;     //stores the currently most suspicious kmer.
   std::string name;        //stores name of the suspicious kmer.
@@ -154,6 +154,43 @@ void DNAPattern::findSuspiciousKmer (unsigned int starting_point){
             << max
             << "."
             << std::endl;
+
+  return name;
+}
+
+/*
+================================================================================
+Input:   a string that you want to find the compliment of.
+
+Return:  The compliment of the string inputed.
+================================================================================
+*/
+
+std::string DNAPattern::findCompliment(std::string DNA_strand){
+
+  std::string DNA_strand_compliment;
+  DNA_strand_compliment.resize(DNA_strand.size());
+
+  for ( unsigned int i = 0; i < DNA_strand.size(); i++ ){
+    if ( DNA_strand[i] == 'A') { DNA_strand_compliment[i] = 'T'; }
+    if ( DNA_strand[i] == 'T') { DNA_strand_compliment[i] = 'A'; }
+    if ( DNA_strand[i] == 'C') { DNA_strand_compliment[i] = 'G'; }
+    if ( DNA_strand[i] == 'G') { DNA_strand_compliment[i] = 'C'; }
+  }
+
+  std::reverse(DNA_strand_compliment.begin(), DNA_strand_compliment.end());
+
+  /*
+    This part is the reason this is a method of DNAPattern. Every pattern and
+    its compliment that is put into this method is stored inside of the object
+    so that it can be used for any number of things.
+  */
+  
+  std::unordered_map<std::string, std::string> DNA_pattern_storage;
+  DNA_pattern_storage.insert(make_pair(DNA_strand, DNA_strand_compliment));
+  kmer_compliments.push_back (DNA_pattern_storage);
+
+  return DNA_strand_compliment;
 }
 
 
