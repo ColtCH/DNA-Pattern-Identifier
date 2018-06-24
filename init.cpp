@@ -1,6 +1,12 @@
 #include "pattern.h"
 #include <iostream>
 #include <fstream>
+/*
+================================================================================
+This main is a demo reel of the program. It showcases the majority of the
+functionality of the class DNA, which can be found in 'pattern.h'.
+================================================================================
+*/
 
 int main(int argc, char const *argv[]) {
 
@@ -34,18 +40,45 @@ int main(int argc, char const *argv[]) {
   std::string DNA_pattern            = pattern_one->findSuspiciousKmer(2);
   std::string DNA_pattern_compliment = pattern_one->findCompliment(DNA_pattern);
 
-  //std::string DNA_pattern_2          = "AATCGTAACCGTTGACAGTA";
-  //std::string DNA_pattern_2_comp     = pattern_one->findCompliment(DNA_pattern_2);
+  int         DNA_skew               = pattern_one->findSkew(0, pattern_one->getDNALength());
+
+  std::cout << DNA_skew << std::endl;
 
   std::cout << DNA_pattern
             << "'s compliment is "
             << DNA_pattern_compliment
             << std::endl;
 
-  //std::cout << DNA_pattern_2
-  //          << "'s compliment is "
-  //          << DNA_pattern_2_comp
-  //          << std::endl;
+
+  std::string first  = "AABAB";
+  std::string second = "AABAA";
+
+  int mismatches = pattern_one->findMismatches(first, second); //This is a test,
+                                                               //and not how this
+                                                               //would be used in
+                                                               //any realistic
+                                                               //setting.
+
+  std::cout << "Number of mismatches between "
+            << first
+            << " and "
+            << second
+            << " is "
+            << mismatches
+            << "."
+            << std::endl;
+
+  std::string small_DNA = "AAB";
+
+  int approximate_matches = pattern_one->findApproxMatches(small_DNA, 2);
+
+  std::cout << "Approximate matches of"
+            << small_DNA
+            << "found in DNA is "
+            << approximate_matches
+            << "."
+            << std::endl;
 
   return 0;
+
 }

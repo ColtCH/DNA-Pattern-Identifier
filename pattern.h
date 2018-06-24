@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <cmath>
+#include <sstream>
 
 class DNAPattern {
 
@@ -36,6 +37,9 @@ public:
   int         getDNALength      ();
   std::string findSuspiciousKmer(unsigned int);
   std::string findCompliment    (std::string);
+  int         findSkew          (int range_low, int range_high);
+  int         findMismatches    (std::string, std::string);
+  int         findApproxMatches (std::string, int);
 
 };
 

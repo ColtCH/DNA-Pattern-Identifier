@@ -185,7 +185,7 @@ std::string DNAPattern::findCompliment(std::string DNA_strand){
     its compliment that is put into this method is stored inside of the object
     so that it can be used for any number of things.
   */
-  
+
   std::unordered_map<std::string, std::string> DNA_pattern_storage;
   DNA_pattern_storage.insert(make_pair(DNA_strand, DNA_strand_compliment));
   kmer_compliments.push_back (DNA_pattern_storage);
@@ -193,6 +193,78 @@ std::string DNAPattern::findCompliment(std::string DNA_strand){
   return DNA_strand_compliment;
 }
 
+/*
+================================================================================
+Input:   Range (low and high, integers), which will be used to parse a specific part of
+         the DNA string associated with this object.
+
+Return:  string stream of the text of the results.
+================================================================================
+*/
+int DNAPattern::findSkew(int range_low, int range_high){
+
+  int skew = 0;
+  int minimum = 0;
+
+  for ( int i = range_low; i < range_high; i++ ){
+    ( DNA[i] == 'C' ) ? skew -= 1 : skew += 1;
+    if ( skew <= minimum ) { std::cout << i << std::endl; minimum = skew; }
+
+
+  }
+
+  return minimum;
+
+}
+/*
+================================================================================
+Input:   Two strings that will be compared for their number of mismatches.
+
+Return:  string stream of the text of the results.
+================================================================================
+*/
+
+int DNAPattern::findMismatches(std::string first, std::string second){
+
+  int mismatches = 0;
+
+  /*If they aren't equal, they won't be compared.*/
+  if ( first.size() != second.size() ) {
+    std::cout << "Inequal size."
+              << std::endl;
+    return 0;
+  }
+
+  for ( unsigned int i = 0; i < first.size(); i++ ){
+    if ( first[i] != second[i] ) { mismatches++; }
+  }
+  return mismatches;
+}
+
+/*
+================================================================================
+Input:   A string to be compared against the currently stored DNA object, and an
+         integer that represents the maximum amount of mutations that can be
+         tolerated.
+
+Return:  Integer that represents the number of matches found.
+================================================================================
+*/
+int DNAPattern::findApproxMatches(std::string DNA_strand, int max_mutations){
+
+  int approximate_matches = 0;
+  for ( unsigned int i = 0; i < DNA.length(); i++ ){
+    int found_mutations = 0;
+    for ( unsigned int j = 0; j < DNA_strand.length(); j++ ){
+      if ( DNA[i+j] != DNA_strand[j] ) { found_mutations++; }
+    }
+    if ( found_mutations <= max_mutations ) { approximate_matches++; }
+  }
+  return approximate_matches;
+
+
+
+}
 
 //GETTERS & SETTERS=============================================================
 int DNAPattern::getDNALength(){ return DNA.length(); }
